@@ -1,9 +1,72 @@
-licitacao %>%
-  filter(situacao_licitacao == "Encerrado") %>%
-  summarise(sum(valor_licitacao))
+
 
 
 #link para o painel de compras
 #http://paineldecompras.economia.gov.br/processos-compra
 
 unique(licitacao$situacao_licitacao)
+
+14764140022.95+ 1358098935.24 + 1052260751.6 + 200082359.8 + 2460445821.43 + 26230835929.69 + 8184061827.22 + 36.79 + 3703117086.85	+ 2671895626.56
+
+14455012914.65+ 1307234671.12 + 1037630110.13 + 198630242.75	+ 2442839498 + 25895706997.64 + 8079174126.67 + 36.79 + 3555013561.03 + 2595447684.62
+
+60.624.938.398
+
+59.566.689.843
+
+
+library(rsiconfi)
+
+dca_despesa_orcamentaria_2016<-
+  get_dca(year = c(2016), annex = "I-D",  entity = "1")
+
+names(dca_despesa_orcamentaria_2016)
+
+glimpse(dca_despesa_orcamentaria_2016)
+
+dca_despesa_orcamentaria_2016 %>%
+  filter(cod_conta %in% c("DO3.3.90.30.00.00",
+                          "DO3.3.90.32.00.00",
+                          "DO3.3.90.33.00.00",
+                          "DO3.3.90.35.00.00",
+                          "DO3.3.90.36.00.00",
+                          "DO3.3.90.39.00.00",
+                          "DO3.3.90.38.00.00",
+                          "DO3.3.90.37.00.00",
+                          "DO4.4.90.51.00.00",
+                          "DO4.4.90.52.00.00")) %>%
+  select(conta, valor, coluna) %>%
+  summarise(valor_total = sum(valor),
+            .by = coluna)
+
+59566689843 + 1058248555
+
+dca_despesa_orcamentaria_2022<-
+  get_dca(year = c(2022), annex = "I-D",  entity = "1")
+
+
+
+dca_despesa_orcamentaria_2022 %>%
+  filter(cod_conta %in% c("DO3.3.90.30.00.00",
+                          "DO3.3.90.32.00.00",
+                          "DO3.3.90.33.00.00",
+                          "DO3.3.90.35.00.00",
+                          "DO3.3.90.36.00.00",
+                          "DO3.3.90.39.00.00",
+                          "DO3.3.90.38.00.00",
+                          "DO3.3.90.37.00.00",
+                          "DO4.4.90.51.00.00",
+                          "DO4.4.90.52.00.00")) %>%
+  select(conta, valor, coluna) %>%
+  summarise(valor_total = sum(valor),
+            .by = coluna)
+
+66555876690 + 1402538720
+
+licitacao <- readRDS("~/Github/compras_governamentais/licitacao.rds")
+
+licitacao %>%
+  filter(situacao_licitacao == "Encerrado") %>%
+  summarise(sum(valor_licitacao))
+
+
