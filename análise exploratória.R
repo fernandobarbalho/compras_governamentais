@@ -1,4 +1,4 @@
-
+library(tidyverse)
 
 
 #link para o painel de compras
@@ -17,6 +17,8 @@ unique(licitacao$situacao_licitacao)
 
 library(rsiconfi)
 
+
+###2016
 dca_despesa_orcamentaria_2016<-
   get_dca(year = c(2016), annex = "I-D",  entity = "1")
 
@@ -47,6 +49,42 @@ dca_despesa_orcamentaria_2016 %>%
 3.3.90.39.00 -
 123456789011245
 
+
+
+#2017
+
+dca_despesa_orcamentaria_2017<-
+  get_dca(year = c(2017), annex = "I-D",  entity = "1")
+
+
+
+dca_despesa_orcamentaria_2017 %>%
+  filter(cod_conta %in% c("DO3.3.90.30.00.00",
+                          "DO3.3.90.32.00.00",
+                          "DO3.3.90.33.00.00",
+                          "DO3.3.90.35.00.00",
+                          "DO3.3.90.36.00.00",
+                          "DO3.3.90.39.00.00",
+                          "DO3.3.90.38.00.00",
+                          "DO3.3.90.37.00.00",
+                          "DO4.4.90.51.00.00",
+                          "DO4.4.90.52.00.00")) %>%
+  summarise(valor_total = sum(valor),
+            .by = coluna)
+
+perc_pib_fab<- (60965849995 / (6.583 * 10^12))*100
+
+
+perc_pib_texto_calc<- ((48+39)*10^9/ (6.583 * 10^12))*100
+
+perc_pib_texto_calc/perc_pib_fab
+
+
+#2022
+dca_despesa_orcamentaria_2022<-
+  get_dca(year = c(2022), annex = "I-D",  entity = "1")
+
+
 dca_despesa_orcamentaria_2022 %>%
   filter(cod_conta %in% c("DO3.3.90.30.00.00",
                           "DO3.3.90.32.00.00",
@@ -74,7 +112,7 @@ dca_despesa_orcamentaria_2022 %>%
                           "DO4.4.90.52.00.00")) %>%
   mutate(conta = str_sub(conta,16,200)) %>%
   select(conta, valor, coluna) %>%
-  filter(coluna = "Despesas Liquidadas")
+  filter(coluna == "Despesas Liquidadas")
 
 66555876690 + 1402538720
 
